@@ -30,8 +30,6 @@ and the sound of your own footsteps.
 - **A stalking enemy AI** (the Watcher) with idle / wandering / investigating
   / searching / chasing states, plus weaker "Drifter" enemies that start
   appearing from loop 3 onward
-- **5 playable characters**, each with real tradeoffs — movement cost, listen
-  cost, sanity recovery, stealth, and stabilizer effectiveness all differ
 - **A sanity system** — move carefully, use LISTEN to detect danger at a
   cost, and collect stabilizers to recover
 - **Full original audio** — every sound effect and music track is
