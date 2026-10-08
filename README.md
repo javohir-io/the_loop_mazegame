@@ -2,9 +2,9 @@
 
 **You have been here before.**
 
-A procedurally generated horror-maze survival game built with Flutter. Find
-the exit before your sanity runs out — or before *the Watcher* finds you
-first.
+A procedurally generated, **first-person** horror-maze survival game built
+with Flutter. Find the exit before your sanity runs out — or before *the
+Watcher* finds you first.
 
 ### ▶️ [Play it now — no install required](https://the-loop-mazegame.netlify.app)
 
@@ -23,13 +23,19 @@ in there with you. It can't see you unless you make noise or wander too
 close — but the longer you survive, the sharper its senses get, the bigger
 the maze grows, and the more of *them* start showing up.
 
-There is no combat. There is no map. There's just you, your sanity meter,
-and the sound of your own footsteps.
+There is no combat. There is no map. You see the maze the way you'd really
+see it: one corridor at a time, fog creeping in from the edges, never quite
+sure what's behind you. There's just you, your sanity meter, and the sound of
+your own footsteps.
 
 Loop 1 is easy. Loop 1 is a lie.
 
 ## Features
 
+- **First-person 3D view** — a Wolfenstein-style raycaster with textured
+  walls, depth fog, head-bob, and billboarded enemies, all rendered in pure
+  Dart/Canvas (no 3D engine). Steps and turns are tile-based but animate
+  smoothly
 - **Procedural mazes** that regenerate every run and grow larger (and scarier)
   with each loop you survive — 15×15 to start, scaling up to 41×41
 - **A stalking enemy AI** (the Watcher) with idle / wandering / investigating
@@ -51,7 +57,8 @@ Loop 1 is easy. Loop 1 is a lie.
 
 | Action | Key |
 |---|---|
-| Move | `WASD` or Arrow Keys |
+| Step forward / backward | `W` / `S` or `↑` / `↓` |
+| Turn left / right | `A` / `D` or `←` / `→` |
 | Listen (detect nearby danger) | `Space` |
 | Restart | `R` |
 | Pause | `Esc` |
@@ -82,9 +89,15 @@ hacked together:
   tick loop
 - A dedicated enemy AI state machine (`EnemyAI`) shared across every enemy
   instance
-- Everything rendered through a single `CustomPainter` — no image assets are
-  required for gameplay elements; walls/floor use `ImageShader` for tiled
-  procedural textures
+- The whole 3D view is a single `CustomPainter` (`RaycastPainter`): one DDA
+  ray per screen column marched through the same `List<List<bool>>` maze the
+  engine already uses, wall textures sampled one pixel-column per ray, and
+  sprites projected and occluded against a per-column depth buffer
+- A `CameraState` that interpolates the rendered position/angle toward the
+  engine's instant, tile-based player position every frame — the engine never
+  knows the camera exists, so gameplay rules are identical to before
+- Camera repaints are driven by a `Ticker` + `repaint:` listenable, so the 3D
+  view runs at display refresh rate without rebuilding the HUD
 - An `AudioManager` that manages looping ambient/chase/heartbeat beds plus
   one-shot SFX, all wrapped defensively so audio failures never crash the
   game
@@ -93,6 +106,8 @@ hacked together:
 
 - [ ] More enemy archetypes with distinct behavior (not just stat variants)
 - [ ] A proper minimap / memory mechanic
+- [ ] Touch controls (on-screen D-pad / swipe-to-turn) for mobile browsers
+- [ ] True floor/ceiling casting and torch sprites in the 3D view
 - [ ] Achievements tied to specific loop milestones
 - [x] Web build deployed via Netlify
 
