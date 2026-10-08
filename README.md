@@ -8,6 +8,9 @@ Watcher* finds you first.
 
 ### ▶️ [Play it now — no install required](https://the-loop-mazegame.netlify.app)
 
+> 🖥️ **Best on desktop with a keyboard.** Touch controls aren't in yet, so the
+> web build isn't playable on phones for now. Headphones recommended.
+
 ![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?logo=dart&logoColor=white)
 ![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS%20%7C%20Web%20%7C%20Desktop-lightgrey)
@@ -53,6 +56,16 @@ Loop 1 is easy. Loop 1 is a lie.
   by hand
 - **Persisted progress** — your deepest loop reached is saved locally
 
+## How to survive
+
+- **Don't rush.** Every step makes noise. The Watcher hears more than it sees.
+- **Your sight shrinks with your sanity.** Low sanity means a short, dark
+  corridor in front of you — and a lot more guessing.
+- **LISTEN sparingly.** It reveals nearby danger and briefly extends your
+  vision, but it costs sanity every time.
+- **Grab stabilizers** when you can. They're the only way to claw sanity back.
+- **When the screen turns red, run.** Dead ends are how loops end.
+
 ## Controls
 
 | Action | Key |
@@ -70,7 +83,9 @@ coward and you'll lose your mind before anything even finds you.
 
 ```bash
 flutter pub get
-flutter run
+flutter run                # picks a connected device / desktop
+flutter run -d chrome      # run the web build locally
+flutter build web --release   # output goes to build/web
 ```
 
 Requires the Flutter SDK (stable channel). Tested targets: Android, iOS,
